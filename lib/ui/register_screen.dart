@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../common/common.dart';
 import 'logn_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -304,6 +305,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "image":"",
         "password": _passwordController.text,
         "role": 'user',
+      });
+
+      await FirebaseFirestore.instance.collection('chat').doc(uid).set({
+        "uid": '${Common.uid}$uid',
+        "userName": _nameController.text,
+        "adminName": "",
+        "adminImage":"",
+        "userImage":"",
+        "userUid": uid,
+        "adminUid": Common.uid,
+        'lastMessage' : "",
+        'dateTime' : "",
+        'status': "",
       });
     } catch (error) {
       toast("Gagal melakukan pendaftaran, silahkan cek koneksi internet anda");
