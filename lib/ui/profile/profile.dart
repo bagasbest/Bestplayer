@@ -1,4 +1,6 @@
 import 'package:bestplayer/ui/logn_screen.dart';
+import 'package:bestplayer/ui/profile/edit_username.dart';
+import 'package:bestplayer/ui/profile/reset_password.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +44,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: Text("Profil"),
         actions: [
           InkWell(
-            child: Container(child: Icon(Icons.settings), margin: EdgeInsets.only(right: 16,),),
-            onTap: () {},
+            child: Container(
+              child: Icon(Icons.refresh),
+              margin: EdgeInsets.only(
+                right: 16,
+              ),
+            ),
+            onTap: () {
+              _initializeRole();
+            },
           )
         ],
       ),
@@ -51,47 +60,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             width: MediaQuery.of(context).size.width,
             color: Color(0xff424242),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CircleAvatar(
-                      radius: 30.0,
-                      backgroundImage: (image != "")
-                          ? NetworkImage(image)
-                          : const NetworkImage(
-                              'https://via.placeholder.com/150'),
-                      backgroundColor: Colors.transparent,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundImage: (image != "")
+                        ? NetworkImage(image)
+                        : const NetworkImage('https://via.placeholder.com/150'),
+                    backgroundColor: Colors.transparent,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
                     ),
-                    SizedBox(
-                      height: 16,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    role,
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
-                    Text(
-                      name,
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      role,
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
+            ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -110,11 +122,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 16,
                 ),
                 InkWell(
-                  onTap: (){},
+                  onTap: () {
+                    Route route = MaterialPageRoute(
+                      builder: (context) => EditUsername(name: name, image: image,),
+                    );
+                    Navigator.push(context, route);
+                  },
                   child: Row(
                     children: [
-                      Icon(Icons.person_outline,),
-                      SizedBox(width: 16,),
+                      Icon(
+                        Icons.person_outline,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
                       Text(
                         "Profil Saya",
                         style: TextStyle(
@@ -129,11 +150,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 16,
                 ),
                 InkWell(
-                  onTap: (){},
+                  onTap: () {
+                    Route route = MaterialPageRoute(
+                      builder: (context) => ResetPassword(),
+                    );
+                    Navigator.push(context, route);
+                  },
                   child: Row(
                     children: [
-                      Icon(Icons.key,),
-                      SizedBox(width: 16,),
+                      Icon(
+                        Icons.key,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
                       Text(
                         "Ganti Password",
                         style: TextStyle(
@@ -148,13 +178,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   height: 16,
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     _showDialogLogout();
                   },
                   child: Row(
                     children: [
-                      Icon(Icons.logout,),
-                      SizedBox(width: 16,),
+                      Icon(
+                        Icons.logout,
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
                       Text(
                         "Logout",
                         style: TextStyle(
@@ -184,7 +218,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Radius.circular(16),
             ),
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFFD94555),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -248,7 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => LoginScreen()),
-                        (Route<dynamic> route) => false);
+                    (Route<dynamic> route) => false);
               },
             ),
           ],

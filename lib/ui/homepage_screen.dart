@@ -30,33 +30,33 @@ class _HomepageScreenState extends State<HomepageScreen> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home_outlined,
-              color: (_currentIndex == 0) ? Colors.blue : Colors.grey,
+              color: (_currentIndex == 0) ? Color(0xFFD94555) : Colors.grey,
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.chat_outlined,
-              color: (_currentIndex == 1) ? Colors.blue : Colors.grey,
+              color: (_currentIndex == 1) ? Color(0xFFD94555) : Colors.grey,
             ),
-            label: 'Chat',
+            label: 'Inbox',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.assignment_outlined,
-              color: (_currentIndex == 2) ? Colors.blue : Colors.grey,
+              color: (_currentIndex == 2) ? Color(0xFFD94555) : Colors.grey,
             ),
             label: 'Order',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outline,
-              color: (_currentIndex == 3) ? Colors.blue : Colors.grey,
+              color: (_currentIndex == 3) ? Color(0xFFD94555) : Colors.grey,
             ),
-            label: 'Profil',
+            label: 'Profile',
           ),
         ],
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Color(0xFFD94555),
         onTap: (index) {
           setState(() {
             _currentIndex = index;

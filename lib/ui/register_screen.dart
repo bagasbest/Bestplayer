@@ -30,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Container(
               height: 100,
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFFD94555),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25),
@@ -43,7 +43,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const Icon(
               Icons.app_registration,
               size: 100,
-              color: Colors.blue,
+              color: Color(0xFFD94555),
             ),
             const Text(
               'REGISTRASI BESTPLAYER',
@@ -200,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Visibility(
                     visible: _visible,
                     child: const SpinKitRipple(
-                      color: Colors.blue,
+                      color: Color(0xFFD94555),
                     ),
                   ),
 
@@ -213,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: 250,
                     height: 50,
                     child: RaisedButton(
-                        color: Colors.blue,
+                        color: Color(0xFFD94555),
                         child: const Text(
                           'Registrasi',
                           style: TextStyle(
@@ -268,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'Ke Halaman Login',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Color(0xFFD94555),
                       ),
                     ),
                   ),
@@ -321,7 +321,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Radius.circular(16),
             ),
           ),
-          backgroundColor: Colors.blue,
+          backgroundColor: Color(0xFFD94555),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -382,7 +382,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Color(0xFFD94555),
                     borderRadius: BorderRadius.circular(32),
                     border: Border.all(color: Colors.white, width: 2),
                   ),

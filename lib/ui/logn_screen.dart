@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               height: 100,
               decoration: const BoxDecoration(
-                color: Colors.blue,
+                color: Color(0xFFD94555),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25),
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const Icon(
               Icons.login,
               size: 100,
-              color: Colors.blue,
+              color: Color(0xFFD94555),
             ),
             const Text(
               'LOGIN',
@@ -135,7 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Visibility(
                     visible: _visible,
                     child: const SpinKitRipple(
-                      color: Colors.blue,
+                      color: Color(0xFFD94555),
                     ),
                   ),
 
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 200,
                     height: 50,
                     child: RaisedButton(
-                        color: Colors.blue,
+                        color: Color(0xFFD94555),
                         child: const Text(
                           'Login',
                           style: TextStyle(
@@ -220,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       'Saya Ingin Mendaftar',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Color(0xFFD94555),
                       ),
                     ),
                   ),
@@ -254,7 +254,7 @@ void toast(String message) {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0xFFD94555),
       textColor: Colors.white,
       fontSize: 16.0);
 }
