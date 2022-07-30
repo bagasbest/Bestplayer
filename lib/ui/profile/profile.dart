@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/common.dart';
+
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
@@ -79,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       radius: 30.0,
                       backgroundImage: (image != "")
                           ? NetworkImage(image)
-                          : const NetworkImage('https://via.placeholder.com/150'),
+                          : NetworkImage(Common.placeholderImage),
                       backgroundColor: Colors.transparent,
                     ),
                     SizedBox(
@@ -129,7 +131,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   InkWell(
                     onTap: () {
                       Route route = MaterialPageRoute(
-                        builder: (context) => EditUsername(name: name, image: image,),
+                        builder: (context) => EditUsername(name: name, role: role),
                       );
                       Navigator.push(context, route);
                     },

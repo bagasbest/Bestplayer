@@ -3,12 +3,15 @@ import 'package:bestplayer/ui/logn_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 /// main program untuk memulai aplikasi
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  WidgetsFlutterBinding.ensureInitialized();
+  // Plugin must be initialized before using
+  await FlutterDownloader.initialize(
+      debug: true // optional: set to false to disable printing logs to console (default: true)
+  );
   await Firebase.initializeApp();
   runApp(MyApp());
 }
@@ -40,7 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void initialization() async {
     await Future.delayed(const Duration(seconds: 3)).then((_) {
-      FlutterNativeSplash.remove();
       setState(() {
         isSplash = false;
       });
@@ -51,24 +53,37 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     /// cek apakah pengguna sudah login sebelumnya atau belum, jika sudah langsung masuk ke homepage, jika belum masuk ke login
     User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          primarySwatch: buildMaterialColor(const Color(0xFFD94555)),
+    if (isSplash) {
+      return Container(
+        color: Colors.white,
+        child: Center(
+          child: Image.asset(
+            'assets/logo.png',
+            width: 150,
+            height: 150,
+          ),
         ),
-        home: HomepageScreen(),
       );
     } else {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          fontFamily: 'Poppins',
-          primarySwatch: buildMaterialColor(Color(0xFFD94555)),
-        ),
-        home: LoginScreen(),
-      );
+      if (user != null) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            primarySwatch: buildMaterialColor(const Color(0xFFD94555)),
+          ),
+          home: HomepageScreen(),
+        );
+      } else {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            fontFamily: 'Poppins',
+            primarySwatch: buildMaterialColor(Color(0xFFD94555)),
+          ),
+          home: LoginScreen(),
+        );
+      }
     }
   }
 

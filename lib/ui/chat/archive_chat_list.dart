@@ -1,16 +1,16 @@
-import 'package:bestplayer/ui/chat/all_chat_message.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/common.dart';
+import 'archive_chat_message.dart';
 
-class AllChatList extends StatelessWidget {
+class ArchiveChatList extends StatelessWidget {
   final List<DocumentSnapshot> document;
   final String adminName;
   final String adminImage;
   final String role;
 
-  AllChatList({
+  ArchiveChatList({
     required this.document,
     required this.adminName,
     required this.adminImage,
@@ -49,13 +49,13 @@ class AllChatList extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             Route route = MaterialPageRoute(
-              builder: (context) => AllChatMessage(
+              builder: (context) => ArchiveChatMessage(
                 uid: uid,
                 userName: userName,
                 userImage: userImage,
                 userUid: userUid,
                 lastMessage: lastMessage,
-                dateTime : dateTime,
+                dateTime: dateTime,
                 status: status,
                 adminUid: adminUid,
                 admName: admName,
@@ -115,7 +115,7 @@ class AllChatList extends StatelessWidget {
                                     height: 5,
                                   ),
                                   Text(
-                                    (lastMessage.contains('http')) ? 'Attachment' : lastMessage,
+                                    'Berisi Arsip Pesan',
                                     maxLines: 1,
                                     style: TextStyle(
                                       fontSize: 11,
@@ -127,20 +127,6 @@ class AllChatList extends StatelessWidget {
                             )
                           ],
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 90,
-                              alignment: Alignment.topCenter,
-                              child: Text(
-                                dateTime,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     )
                   : Row(
@@ -185,7 +171,7 @@ class AllChatList extends StatelessWidget {
                                     height: 5,
                                   ),
                                   Text(
-                                    (lastMessage.contains('http')) ? 'Attachment' : lastMessage,
+                                    'Berisi Arsip Pesan',
                                     maxLines: 1,
                                     style: TextStyle(
                                       fontSize: 11,
@@ -195,36 +181,6 @@ class AllChatList extends StatelessWidget {
                                 ],
                               ),
                             )
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              dateTime,
-                              style: TextStyle(
-                                fontSize: 11,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            (status != '')
-                                ? Container(
-                                    height: 25,
-                                    child: Text(status),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: (status == "delivered")
-                                            ? Colors.orange
-                                            : (status == "revision")
-                                                ? Colors.purple
-                                                : (status == "accepted")
-                                                    ? Colors.lightGreenAccent
-                                                    : (status == "payment")
-                                                        ? Colors.blue
-                                                        : Colors.green),
-                                  )
-                                : Container()
                           ],
                         ),
                       ],

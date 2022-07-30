@@ -44,9 +44,12 @@ dependencies:
   dotted_border: ^2.0.0+1
   image_picker: ^0.8.4+9
   intl: ^0.17.0
+  file_picker: ^5.0.0
   shimmer: ^2.0.0
   shared_preferences: ^2.0.15
-  flutter_native_splash: ^2.2.6
+  flutter_downloader: ^1.5.2
+  path_provider:
+  permission_handler:
 
 dev_dependencies:
   flutter_test:
@@ -57,15 +60,6 @@ dev_dependencies:
 
 flutter_icons:
   image_path: "assets/logo.png"
-  android: true
-  ios: true
-
-flutter_native_splash:
-  image: assets/logo.png
-  color: "#ffffff"
-  android_12:
-    image: assets/logo.png
-    color: "#ffffff"
   android: true
   ios: true
 

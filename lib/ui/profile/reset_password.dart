@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../widget/theme.dart';
+
 class ResetPassword extends StatefulWidget {
   const ResetPassword({Key? key}) : super(key: key);
 
@@ -18,107 +20,110 @@ class _ResetPasswordState extends State<ResetPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Ganti Password"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+    return Theme(
+      data: Themes(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Ganti Password"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 30,
-            ),
-
-            /// KOLOM NAMA
-            Container(
-              margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(30),
+        body: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30,
               ),
-              child: TextFormField(
-                controller: _emailController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: const InputDecoration(
-                  hintText: 'Masukkan Email Anda',
-                  border: InputBorder.none,
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Email tidak boleh kosong';
-                  } else {
-                    return null;
-                  }
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
 
-            /// LOADING INDIKATOR
-            Visibility(
-              visible: _visible,
-              child: const SpinKitRipple(
-                color: Color(0xFFD94555),
-              ),
-            ),
-
-            const SizedBox(
-              height: 16,
-            ),
-
-            InkWell(
-              onTap: () async {
-                /// CEK APAKAH KOLOM KOLOM SUDAH TERISI SEMUA
-                if (_formKey.currentState!.validate()) {
-                  setState(() {
-                    _visible = true;
-                  });
-
-                  await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text).then((value){
-                    showSuccessDialog();
-                  })
-                  .onError((error, stackTrace) {
-                    toast('Gagal mengirim permohonan ganti password!');
-                  });
-
-
-                  setState(() {
-                    _visible = false;
-                    _emailController.text = "";
-                  });
-                }
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 45,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+              /// KOLOM NAMA
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextFormField(
+                  controller: _emailController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                    hintText: 'Masukkan Email Anda',
+                    border: InputBorder.none,
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Email tidak boleh kosong';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+
+              /// LOADING INDIKATOR
+              Visibility(
+                visible: _visible,
+                child: const SpinKitRipple(
                   color: Color(0xFFD94555),
                 ),
-                child: Center(
-                  child: Text(
-                    'Kirim Permintaan',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+              ),
+
+              const SizedBox(
+                height: 16,
+              ),
+
+              InkWell(
+                onTap: () async {
+                  /// CEK APAKAH KOLOM KOLOM SUDAH TERISI SEMUA
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      _visible = true;
+                    });
+
+                    await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text).then((value){
+                      showSuccessDialog();
+                    })
+                    .onError((error, stackTrace) {
+                      toast('Gagal mengirim permohonan ganti password!');
+                    });
+
+
+                    setState(() {
+                      _visible = false;
+                      _emailController.text = "";
+                    });
+                  }
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 45,
+                  margin: EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFFD94555),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Kirim Permintaan',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
