@@ -50,6 +50,7 @@ dependencies:
   flutter_downloader: ^1.5.2
   path_provider:
   permission_handler:
+  money_formatter: ^0.0.3
 
 dev_dependencies:
   flutter_test:
