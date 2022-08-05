@@ -18,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _addressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
   bool _visible = false;
@@ -160,6 +161,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
 
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  /// KOLOM ALAMAT
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: TextFormField(
+                      controller: _addressController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      decoration: const InputDecoration(
+                        hintText: 'Alamat Lengkap (Rumah / Kantor)',
+                        border: InputBorder.none,
+                      ),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Alamat Lengkap tidak boleh kosong';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+
                   /// KOLOM PASSWORD
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
@@ -242,6 +275,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 _nameController.text = "";
                                 _phoneController.text = "";
                                 _emailController.text = "";
+                                _addressController.text = "";
                                 _passwordController.text = "";
                               });
 
@@ -302,6 +336,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "name": _nameController.text,
         "email": _emailController.text,
         "phone": _phoneController.text,
+        "address": _addressController.text,
         "image":"",
         "password": _passwordController.text,
         "role": 'user',

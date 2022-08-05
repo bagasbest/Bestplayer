@@ -2,6 +2,7 @@ import 'package:bestplayer/ui/home/home_detail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   String name = "";
+  final NumberFormat format = NumberFormat('#,##0', 'en_US');
+  String role = "";
 
   @override
   void initState() {
@@ -22,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     FirebaseFirestore.instance.collection('users').doc(uid).get().then((value) {
       setState(() {
         name = value.data()!["name"];
+        role = value.data()!["role"];
       });
     });
   }
@@ -77,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
 
                     String paket = 'Paket 1';
-                    String image = 'assets/logo.png';
+                    String image = 'assets/paket1.png';
                     int harga = 120000;
                     String jerseyDepan = 'Non-Printing';
                     String jerseyBelakang = 'Non-Printing';
@@ -96,6 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         celana: celana,
                         waktuDesain: waktuDesain,
                         revisiTotal: revisiTotal,
+                        role: role,
                       ),
                     );
                     Navigator.push(context, route);
@@ -112,22 +117,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('assets/logo.png',
+                            child: Image.asset('assets/paket1.png',
                               fit: BoxFit.cover, width: MediaQuery
                                   .of(context)
                                   .size
-                                  .width, height: 150,),
+                                  .width, height: 250,),
                           ),
                           SizedBox(height: 16,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Paket 1',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Paket 1',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp.${format.format(120000)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
 
                               Text(
@@ -153,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
 
                     String paket = 'Paket 2';
-                    String image = 'assets/logo.png';
+                    String image = 'assets/paket2.png';
                     int harga = 135000;
                     String jerseyDepan = 'Printing';
                     String jerseyBelakang = 'Non-Printing';
@@ -172,6 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         celana: celana,
                         waktuDesain: waktuDesain,
                         revisiTotal: revisiTotal,
+                        role: role,
                       ),
                     );
                     Navigator.push(context, route);
@@ -188,22 +207,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('assets/logo.png',
+                            child: Image.asset('assets/paket2.png',
                               fit: BoxFit.cover, width: MediaQuery
                                   .of(context)
                                   .size
-                                  .width, height: 150,),
+                                  .width, height: 250,),
                           ),
                           SizedBox(height: 16,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Paket 2',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Paket 2',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp.${format.format(135000)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
 
                               Text(
@@ -229,7 +261,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
 
                     String paket = 'Paket 3';
-                    String image = 'assets/logo.png';
+                    String image = 'assets/paket3.png';
                     int harga = 150000;
                     String jerseyDepan = 'Printing';
                     String jerseyBelakang = 'Printing';
@@ -248,6 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         celana: celana,
                         waktuDesain: waktuDesain,
                         revisiTotal: revisiTotal,
+                        role: role,
                       ),
                     );
                     Navigator.push(context, route);
@@ -264,22 +297,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('assets/logo.png',
+                            child: Image.asset('assets/paket3.png',
                               fit: BoxFit.cover, width: MediaQuery
                                   .of(context)
                                   .size
-                                  .width, height: 150,),
+                                  .width, height: 250,),
                           ),
                           SizedBox(height: 16,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Paket 3',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Paket 3',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp.${format.format(150000)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
 
                               Text(
@@ -305,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
 
                     String paket = 'Paket 4';
-                    String image = 'assets/logo.png';
+                    String image = 'assets/paket4.png';
                     int harga = 175000;
                     String jerseyDepan = 'Printing';
                     String jerseyBelakang = 'Printing';
@@ -324,6 +370,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         celana: celana,
                         waktuDesain: waktuDesain,
                         revisiTotal: revisiTotal,
+                        role: role,
+
                       ),
                     );
                     Navigator.push(context, route);
@@ -340,22 +388,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(10),
-                            child: Image.asset('assets/logo.png',
+                            child: Image.asset('assets/paket4.png',
                               fit: BoxFit.cover, width: MediaQuery
                                   .of(context)
                                   .size
-                                  .width, height: 150,),
+                                  .width, height: 250,),
                           ),
                           SizedBox(height: 16,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Paket 4',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Paket 4',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp.${format.format(175000)}',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
                               ),
 
                               Text(

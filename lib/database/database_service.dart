@@ -71,4 +71,64 @@ class DatabaseService {
           'Gagal memperbarui profil, silahkan cek koneksi anda dan coba lagi nanti');
     }
   }
+
+  static createOrder(
+    String orderId,
+    String paket,
+    String gambar,
+    int totalHarga,
+    double discount50,
+    String jerseyDepan,
+    String jerseyBelakang,
+    String celana,
+    int waktuDesainInMillis,
+    int revisiTotal,
+    String teamId,
+    String teamName,
+    String teamPhone,
+    String teamAddress,
+    String orderDate,
+    String status,
+    String qty,
+    String sponsor,
+  ) async {
+    try {
+      await FirebaseFirestore.instance.collection('order').doc(orderId).set({
+        'orderId': orderId,
+        'paket': paket,
+        'gambar': gambar,
+        'totalHarga': totalHarga,
+        'discount50': discount50,
+        'jerseyDepan': jerseyDepan,
+        'jerseyBelakang': jerseyBelakang,
+        'celana': celana,
+        'waktuDesainInMillis': waktuDesainInMillis,
+        'revisiTotal': revisiTotal,
+        'teamId': teamId,
+        'teamName': teamName,
+        'teamPhone': teamPhone,
+        'teamAddress': teamAddress,
+        'orderDate': orderDate,
+        'status': status,
+        'qty': qty,
+        'sponsor': sponsor,
+      });
+      return true;
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  static updateChat(String teamId, String status) async {
+    try {
+      await FirebaseFirestore.instance.collection('chat').doc(teamId).update({
+        'status': status,
+      });
+      return true;
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
 }
