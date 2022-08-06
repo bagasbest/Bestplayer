@@ -313,11 +313,15 @@ class _HomeDetailState extends State<HomeDetail> {
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Color(0xFFD94555),
+                              color: (widget.role == 'user')
+                                  ? Color(0xFFD94555)
+                                  : Colors.red[200],
                             ),
                             child: Center(
-                              child: Text( (widget.role == 'user') ?
-                                'Order ${widget.paket} Sekarang' : 'Admin tidak bisa order',
+                              child: Text(
+                                (widget.role == 'user')
+                                    ? 'Order ${widget.paket} Sekarang'
+                                    : 'Admin tidak bisa order',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -455,8 +459,7 @@ class _HomeDetailState extends State<HomeDetail> {
                 var teamName = "";
                 var teamPhone = "";
                 var teamAddress = "";
-                int orderId =
-                    DateTime.now().millisecondsSinceEpoch;
+                int orderId = DateTime.now().millisecondsSinceEpoch;
 
                 if (widget.waktuDesain == "1 Hari") {
                   waktuDesainInMillis = 86400000 + orderId;

@@ -84,8 +84,8 @@ class ArchiveChatList extends StatelessWidget {
                           children: [
                             Container(
                                 padding: EdgeInsets.all(3),
-                                height: 40,
-                                width: 40,
+                                height: 50,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: Colors.red,
@@ -137,8 +137,8 @@ class ArchiveChatList extends StatelessWidget {
                           children: [
                             Container(
                                 padding: EdgeInsets.all(3),
-                                height: 40,
-                                width: 40,
+                                height: 50,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: Colors.red,
@@ -148,7 +148,7 @@ class ArchiveChatList extends StatelessWidget {
                                   child: Image.network(
                                       (userImage != "")
                                           ? userImage
-                                          : 'https://via.placeholder.com/150',
+                                          : Common.placeholderImage,
                                       fit: BoxFit.cover),
                                 )),
                             SizedBox(

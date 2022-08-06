@@ -1,6 +1,5 @@
 import 'package:bestplayer/ui/chat/all_chat.dart';
 import 'package:bestplayer/ui/chat/archive_chat.dart';
-import 'package:bestplayer/ui/chat/unread_chat.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,20 +29,18 @@ class _ChatScreenState extends State<ChatScreen> {
         primarySwatch: buildMaterialColor(const Color(0xFFD94555)),
       ),
       child: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             title: Text('Inbox'),
             bottom: const TabBar(tabs: [
               Tab(text: 'Semua',),
-              Tab(text: 'Belum Dibaca',),
               Tab(text: 'Arsip',),
             ]),
           ),
           body: TabBarView(
             children: [
               AllChat(),
-              UnreadChat(),
               ArchiveChat(),
             ],
           ),

@@ -44,8 +44,6 @@ class AllChatList extends StatelessWidget {
         admName = adminName;
         admImage = adminImage;
 
-        print(admName);
-
         return GestureDetector(
           onTap: () {
             Route route = MaterialPageRoute(
@@ -55,7 +53,7 @@ class AllChatList extends StatelessWidget {
                 userImage: userImage,
                 userUid: userUid,
                 lastMessage: lastMessage,
-                dateTime : dateTime,
+                dateTime: dateTime,
                 status: status,
                 adminUid: adminUid,
                 admName: admName,
@@ -84,8 +82,8 @@ class AllChatList extends StatelessWidget {
                           children: [
                             Container(
                                 padding: EdgeInsets.all(3),
-                                height: 40,
-                                width: 40,
+                                height: 50,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: Colors.red,
@@ -114,13 +112,17 @@ class AllChatList extends StatelessWidget {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
-                                    (lastMessage.contains('http')) ? 'Attachment' : lastMessage,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontSize: 11,
+                                  Expanded(
+                                    child: Text(
+                                      (lastMessage.contains('http'))
+                                          ? 'Attachment'
+                                          : lastMessage,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
                               ),
@@ -151,8 +153,8 @@ class AllChatList extends StatelessWidget {
                           children: [
                             Container(
                                 padding: EdgeInsets.all(3),
-                                height: 40,
-                                width: 40,
+                                height: 50,
+                                width: 50,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: Colors.red,
@@ -162,7 +164,7 @@ class AllChatList extends StatelessWidget {
                                   child: Image.network(
                                       (userImage != "")
                                           ? userImage
-                                          : 'https://via.placeholder.com/150',
+                                          : Common.placeholderImage,
                                       fit: BoxFit.cover),
                                 )),
                             SizedBox(
@@ -184,13 +186,17 @@ class AllChatList extends StatelessWidget {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
-                                    (lastMessage.contains('http')) ? 'Attachment' : lastMessage,
-                                    maxLines: 1,
-                                    style: TextStyle(
-                                      fontSize: 11,
+                                  Expanded(
+                                    child: Text(
+                                      (lastMessage.contains('http'))
+                                          ? 'Attachment'
+                                          : lastMessage,
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
                               ),
@@ -210,8 +216,18 @@ class AllChatList extends StatelessWidget {
                             ),
                             (status != '')
                                 ? Container(
-                                    height: 25,
-                                    child: Text(status),
+                                    height: 20,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    child: Text(
+                                      status,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
+                                    ),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         color: (status == "delivered")
