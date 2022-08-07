@@ -1,10 +1,13 @@
+import 'package:bestplayer/database/database_service.dart';
 import 'package:bestplayer/ui/register_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../common/common.dart';
 import 'homepage_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -172,14 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _visible = true;
                               });
 
-                              /// Cek apakah ada no hp yang diinputkan pengguna ketika klik login
-                              // var collection = FirebaseFirestore.instance.collection('users');
-                              // var docSnapshot = await collection.where("phone", isEqualTo: _phoneController.text).limit(1).get();
-                              // if (docSnapshot.size > 0) {
-                              //   Map<String, dynamic>? data = docSnapshot.docs.first.data();
-                              //   var email = data['email'];
-
-                              /// CEK APAKAH EMAIL DAN PASSWORD SUDAH TERDAFTAR / BELUM
                               bool shouldNavigate = await _signInHandler(
                                 _emailController.text,
                                 _passwordController.text,
@@ -193,6 +188,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _formKey.currentState!.reset();
 
                                 /// MASUK KE HOMEPAGE JIKA SUKSES LOGIN
+                                if(_emailController.text == 'admin@gmail.com') {
+                                  String? token = await FirebaseMessaging.instance.getToken();
+                                  DatabaseService.updateAdminToken(token);
+                                }
                                 Route route = MaterialPageRoute(
                                     builder: (context) =>
                                         const HomepageScreen());

@@ -345,58 +345,61 @@ class _OrderDetailState extends State<OrderDetail> {
                       borderRadius: BorderRadius.circular(10)),
                   child: Padding(
                     padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Keterangan Order',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Nama Tim: ${widget.teamName}',
-                        ),
-                        Text(
-                          'Nomor Telepon Tim: ${widget.teamPhone}',
-                        ),
-                        Text(
-                          'Alamat Tim: ${widget.teamAddress}',
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          'Kuantitas Order: ${widget.qty} Setel',
-                        ),
-                        Text(
-                          'Sponsor: ${widget.sponsor}',
-                        ),
-                        Text(
-                          'Total Harga: Rp.${format.format(widget.totalHarga)}',
-                        ),
-                        Text(
-                          'Tanggal Order: ${widget.orderDate}',
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          'Status Order: ${widget.status}',
-                        ),
-                        Text(
-                          'Revisi Tersisa: ${widget.revisiTotal}',
-                        ),
-                        Text(
-                          'Deadline: $deadline',
-                          style: TextStyle(
-                              color: Color(0xFFD94555),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Keterangan Order',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'Nama Tim: ${widget.teamName}',
+                          ),
+                          Text(
+                            'Nomor Telepon Tim: ${widget.teamPhone}',
+                          ),
+                          Text(
+                            'Alamat Tim: ${widget.teamAddress}',
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Kuantitas Order: ${widget.qty} Setel',
+                          ),
+                          Text(
+                            'Sponsor: ${widget.sponsor}',
+                          ),
+                          Text(
+                            'Total Harga: Rp.${format.format(widget.totalHarga)}',
+                          ),
+                          Text(
+                            'Tanggal Order: ${widget.orderDate}',
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            'Status Order: ${widget.status}',
+                          ),
+                          Text(
+                            'Revisi Tersisa: ${widget.revisiTotal}',
+                          ),
+                          Text(
+                            'Deadline: $deadline',
+                            style: TextStyle(
+                                color: Color(0xFFD94555),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

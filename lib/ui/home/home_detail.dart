@@ -1,13 +1,15 @@
+import 'dart:convert';
+
 import 'package:bestplayer/database/database_service.dart';
-import 'package:bestplayer/ui/logn_screen.dart';
+import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
-import 'package:money_formatter/money_formatter.dart';
 
+import '../../common/common.dart';
 import '../../widget/theme.dart';
 
 class HomeDetail extends StatefulWidget {
@@ -46,6 +48,11 @@ class _HomeDetailState extends State<HomeDetail> {
   final _formKey = GlobalKey<FormState>();
   bool _visible = false;
   String sponsor = '';
+
+  String notificationTitle = '';
+  String notificationBody = '';
+  String adminToken = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -466,8 +473,7 @@ class _HomeDetailState extends State<HomeDetail> {
                 } else if (widget.waktuDesain == "2 Hari") {
                   waktuDesainInMillis = 172800000 + orderId;
                 }
-                print(orderId.toString());
-                print(waktuDesainInMillis.toString());
+
 
                 String teamId = FirebaseAuth.instance.currentUser!.uid;
                 String orderDate =
@@ -481,6 +487,16 @@ class _HomeDetailState extends State<HomeDetail> {
                   teamPhone = value.data()!["phone"];
                   teamAddress = value.data()!["address"];
                 });
+
+                await  FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(Common.uid)
+                    .get()
+                    .then((value) {
+                  adminToken = value.data()!["token"];
+                });
+                notificationTitle = '$teamName Order ${widget.paket}';
+                notificationBody = 'Silahkan upload desain dalam ${widget.waktuDesain}';
 
                 bool makeOrder = await DatabaseService.createOrder(
                   orderId.toString(),
@@ -505,6 +521,8 @@ class _HomeDetailState extends State<HomeDetail> {
 
                 bool updateChatStatus =
                     await DatabaseService.updateChat(teamId, 'Delivered');
+
+                await sendPushMessage();
 
                 setState(() {
                   _visible = false;
@@ -635,5 +653,42 @@ class _HomeDetailState extends State<HomeDetail> {
         );
       },
     );
+  }
+
+  Future<void> sendPushMessage() async {
+    if (adminToken == '') {
+      print('Unable to send FCM message, no token exists.');
+      return;
+    }
+
+    try {
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization':
+          'key=${Common.serverKey}',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'notification': <String, dynamic>{
+              'body': notificationBody,
+              'title': notificationTitle,
+            },
+            'priority': 'high',
+            'data': <String, dynamic>{
+              'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+              'id': '1',
+              'status': 'done'
+            },
+            "to": adminToken,
+          },
+        ),
+      );
+      print('done');
+      print('$adminToken');
+    } catch (e) {
+      print("error push notification");
+    }
   }
 }

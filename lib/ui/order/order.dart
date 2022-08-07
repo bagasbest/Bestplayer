@@ -74,7 +74,7 @@ class _OrderScreenState extends State<OrderScreen> {
                         'Diproduksi',
                         'Dikemas',
                         'Dikirim',
-                        'Produk Diterima',
+                        'Diterima',
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,

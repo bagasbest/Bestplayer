@@ -304,4 +304,15 @@ class DatabaseService {
       return false;
     }
   }
+
+  static Future<void> updateAdminToken(String? token) async {
+    try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'token': token,
+      });
+    } catch (error) {
+      print(error.toString());
+    }
+  }
 }
