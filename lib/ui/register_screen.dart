@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(30),
@@ -99,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(30),
@@ -136,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(30),
@@ -164,11 +164,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(
                     height: 16,
                   ),
+
                   /// KOLOM ALAMAT
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(30),
@@ -197,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
+                        const EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(30),
@@ -223,6 +224,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Kata Sandi tidak boleh kosong';
+                        } else if (value.length < 6) {
+                          return 'Kata sandi minimal 6 karakter';
                         } else {
                           return null;
                         }
@@ -337,7 +340,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "email": _emailController.text,
         "phone": _phoneController.text,
         "address": _addressController.text,
-        "image":"",
+        "image": "",
         "password": _passwordController.text,
         "role": 'user',
       });
@@ -346,12 +349,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "uid": '${Common.uid}$uid',
         "userName": _nameController.text,
         "adminName": "",
-        "adminImage":"",
-        "userImage":"",
+        "adminImage": "",
+        "userImage": "",
         "userUid": uid,
         "adminUid": Common.uid,
-        'lastMessage' : "",
-        'dateTime' : "",
+        'lastMessage': "",
+        'dateTime': "",
         'status': "",
       });
     } catch (error) {

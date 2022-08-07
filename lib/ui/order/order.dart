@@ -93,20 +93,31 @@ class _OrderScreenState extends State<OrderScreen> {
                       top: 80,
                     ),
                     child: StreamBuilder(
-                      stream: (role != "admin")
-                          ? FirebaseFirestore.instance
-                              .collection('order')
-                              .where("teamId", isEqualTo: uid)
-                              .snapshots()
-                          : FirebaseFirestore.instance
-                              .collection('order')
-                              .snapshots(),
+                      stream: (role == "user")
+                          ? (dropdownValue == 'Semua')
+                              ? FirebaseFirestore.instance
+                                  .collection('order')
+                                  .where("teamId", isEqualTo: uid)
+                                  .snapshots()
+                              : FirebaseFirestore.instance
+                                  .collection('order')
+                                  .where("teamId", isEqualTo: uid)
+                                  .where("status", isEqualTo: dropdownValue)
+                                  .snapshots()
+                          : (dropdownValue == 'Semua')
+                              ? FirebaseFirestore.instance
+                                  .collection('order')
+                                  .snapshots()
+                              : FirebaseFirestore.instance
+                                  .collection('order')
+                                  .where('status', isEqualTo: dropdownValue)
+                                  .snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasData) {
                           return (snapshot.data!.size > 0)
                               ? OrderList(
-                                  document: snapshot.data!.docs,
+                                  document: snapshot.data!.docs.reversed.toList(),
                                   role: role,
                                 )
                               : _emptyData();
@@ -127,7 +138,7 @@ class _OrderScreenState extends State<OrderScreen> {
     return Container(
       child: Center(
         child: Text(
-          'Tidak Ada Inbox\nTersedia',
+          'Tidak Ada Order\nTersedia',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 18),

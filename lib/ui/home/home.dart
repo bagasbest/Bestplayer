@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     String jerseyBelakang = 'Printing';
                     String celana = 'Non-Printing';
                     String waktuDesain = '2 Hari';
-                    int revisiTotal = 3;
+                    int revisiTotal = 4;
 
 
                     Route route = MaterialPageRoute(
@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     String jerseyDepan = 'Printing';
                     String jerseyBelakang = 'Printing';
                     String celana = 'Printing';
-                    String waktuDesain = '1 Hari';
+                    String waktuDesain = '2 Hari';
                     int revisiTotal = 5;
 
 

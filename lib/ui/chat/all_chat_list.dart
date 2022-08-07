@@ -229,16 +229,31 @@ class AllChatList extends StatelessWidget {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: (status == "delivered")
-                                            ? Colors.orange
-                                            : (status == "revision")
-                                                ? Colors.purple
-                                                : (status == "accepted")
-                                                    ? Colors.lightGreenAccent
-                                                    : (status == "payment")
-                                                        ? Colors.blue
-                                                        : Colors.green),
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: (status == "Delivered")
+                                          ? Colors.orange
+                                          : (status == "Revision")
+                                              ? Colors.purple
+                                              : (status == "Accepted")
+                                                  ? Colors.pinkAccent
+                                                  : (status == "Payment")
+                                                      ? Colors.blue
+                                                      : (status ==
+                                                              "Completed")
+                                                          ? Colors.green
+                                                          : (status ==
+                                                                  'Diproduksi')
+                                                              ? Colors.amber
+                                                              : (status ==
+                                                                      'Dikemas')
+                                                                  ? Colors.lime
+                                                                  : (status ==
+                                                                          'Dikirim')
+                                                                      ? Colors
+                                                                          .deepOrange
+                                                                      : Colors
+                                                                          .lightGreen,
+                                    ),
                                   )
                                 : Container()
                           ],

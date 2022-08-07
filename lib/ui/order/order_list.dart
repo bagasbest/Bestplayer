@@ -1,8 +1,8 @@
 import 'package:bestplayer/ui/order/order_detail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 class OrderList extends StatelessWidget {
   final List<DocumentSnapshot> document;
   final String role;
@@ -36,6 +36,11 @@ class OrderList extends StatelessWidget {
         String status = document[i]['status'].toString();
         String qty = document[i]['qty'].toString();
         String sponsor = document[i]['sponsor'].toString();
+        String keteranganRevisi = document[i]['keteranganRevisi'].toString();
+        String paymentProof = document[i]['paymentProof'].toString();
+        String paymentStatus = document[i]['paymentStatus'].toString();
+        String resi = document[i]['resi'].toString();
+        String paymentMethod = document[i]['paymentMethod'].toString();
 
         return GestureDetector(
           onTap: () {
@@ -59,6 +64,12 @@ class OrderList extends StatelessWidget {
                 status: status,
                 qty: qty,
                 sponsor: sponsor,
+                role: role,
+                keteranganRevisi: keteranganRevisi,
+                paymentProof: paymentProof,
+                paymentStatus: paymentStatus,
+                resi: resi,
+                paymentMethod: paymentMethod,
               ),
             );
             Navigator.push(context, route);
@@ -107,15 +118,29 @@ class OrderList extends StatelessWidget {
                         child: Text(
                           'Tanggal Order: $orderDate',
                           maxLines: 1,
-
                         ),
                       ),
                       Container(
                         padding: EdgeInsets.all(5.0),
                         decoration: BoxDecoration(
-                          color: Color(0xFFD94555),
-                          borderRadius: BorderRadius.circular(7)
-                        ),
+                            color: (status == "Delivered")
+                                ? Colors.orange
+                                : (status == "Revision")
+                                    ? Colors.purple
+                                    : (status == "Accepted")
+                                        ? Colors.pinkAccent
+                                        : (status == "Payment")
+                                            ? Colors.blue
+                                            : (status == "Completed")
+                                                ? Colors.green
+                                                : (status == 'Diproduksi')
+                                                    ? Colors.amber
+                                                    : (status == 'Dikemas')
+                                                        ? Colors.lime
+                                                        : (status == 'Dikirim')
+                                                            ? Colors.deepOrange
+                                                            : Colors.lightGreen,
+                            borderRadius: BorderRadius.circular(7)),
                         child: Text(
                           status,
                           style: TextStyle(
